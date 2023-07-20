@@ -1,0 +1,163 @@
+body {
+  background-color: #000;
+}
+main {
+  text-align: center;
+}
+
+h1,
+h2 {
+  color: white;
+}
+
+h2 {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.5em;
+}
+
+.title {
+  font-size: 2em;
+  padding-top: 20px;
+}
+
+.sort {
+  margin-bottom: 15px;
+}
+
+.sortBtn {
+  padding: 5px;
+  border: 1px solid black;
+  border-radius: 8px;
+}
+
+.column-1,
+.column-2 {
+  width: 50%;
+  max-width: 50%;
+  border: 1px solid black;
+  border-radius: 8px;
+}
+
+.column-1 {
+  background-color: cadetblue;
+}
+
+.column-2 {
+  background-color: goldenrod;
+}
+
+.column-1 h2,
+.column-2 h2 {
+  border: 1px solid black;
+  border-radius: 8px;
+  display: inline-block;
+  padding: 5px 8px;
+  text-shadow: 2px 2px black;
+}
+
+.column-1 h2 {
+  background-color: goldenrod;
+}
+.column-2 h2 {
+  background-color: cadetblue;
+}
+
+.brewer-info {
+  display: flex;
+}
+
+#main,
+#favs {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.brewer,
+.fav-brewer {
+  width: 33%;
+  padding: 15px;
+  border: 1px solid black;
+  border-radius: 8px;
+  margin: 5px;
+}
+
+.brewer {
+  background-color: goldenrod;
+}
+
+.fav-brewer {
+  background-color: cadetblue;
+}
+
+.brewer-card {
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+  overflow: hidden;
+}
+
+.brewer-card img {
+  width: 40px;
+  height: 40px;
+}
+
+.brewer-card h4 {
+  font-size: 1em;
+  margin-top: 0.5em;
+  margin-bottom: 0.2em;
+}
+
+.brewer-card p {
+  font-size: 0.75em;
+  margin-top: 0.2em;
+  margin-bottom: 0px;
+}
+
+.brewer-card button {
+  margin-top: 5px;
+  background-color: red;
+  color: white;
+  padding: 3px;
+  border: 1px solid black;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .brewer-select {
+    width: 80%;
+    display: inline-block;
+  }
+  .column-1,
+  .column-2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .brewer,
+  .fav-brewer {
+    width: 125px;
+  }
+}
+
+@media (max-width: 375px) {
+  .micro-brews h2 {
+    font-size: 1.25em;
+  }
+  .column-1 h2,
+  .column-2 h2 {
+    width: 80%;
+  }
+
+  .st-address {
+    display: none;
+  }
+}
+
+@media (max-width: 320px) {
+  .brewer,
+  .fav-brewer {
+    width: 100px;
+  }
+}

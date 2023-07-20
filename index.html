@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JS and API Project</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <main>
+    <section class="header-info">
+      <h1 class="title">San Antonio Brewers</h1>
+      <div class="micro-brews">
+        <h2 class="micro-display">Total number of Micro-Breweries in San Antonio: <span id="mb-number"></span></h2>
+        <h2 class="brewer-select">Click on the brewer you want to add to or remove from your "Favorite Brewers" list!
+        </h2>
+      </div>
+      <div class="sort">
+        <button class="sortBtn" type="button" data-sortdir="asc">List Brewers A-Z</button>
+        <button class="sortBtn" type="button" data-sortdir="desc">List Brewers Z-A</button>
+      </div>
+    </section>
+    <section class="brewer-info">
+      <div class="column-1">
+        <h2>Available Brewers</h2>
+        <div id="main" class="brewer-list">
+        </div>
+      </div>
+      <div class="column-2">
+        <h2>Favorite Brewers</h2>
+        <div id="favs" class="favorite-brewers">
+        </div>
+      </div>
+    </section>
+  </main>
+  <script src="api-practice.js"></script>
+</body>
+
+</html>
