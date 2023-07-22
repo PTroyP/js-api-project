@@ -6,7 +6,7 @@ const microArr = [];
 const url =
   'https://api.openbrewerydb.org/v1/breweries?by_city=san_antonio&per_page=20';
 
-const getData = () => {
+const getData = (url) => {
   return fetch(url)
     .then((res) => res.json())
     .then((data) => data)
@@ -78,19 +78,32 @@ const createBrewerCard = (data) => {
 const updateCollections = (id, direction) => {
   const card = document.getElementById(id);
 
-  if (direction === 'toFavs') {
-    favsList.appendChild(card);
-    card.classList.remove('brewer');
-    card.classList.add('fav-brewer');
-    card.lastChild.children[5].innerHTML = 'Unselect as a Favorite!';
-  }
+  // Abbreviated version below:
+  // if (direction === 'toFavs') {
+  //   favsList.appendChild(card);
+  //   card.classList.remove('brewer');
+  //   card.classList.add('fav-brewer');
+  //   card.lastChild.children[5].innerHTML = 'Unselect as a Favorite!';
+  // }
 
-  if (direction === 'toMain') {
-    mainList.appendChild(card);
-    card.classList.remove('fav-brewer');
-    card.classList.add('brewer');
-    card.lastChild.children[5].innerHTML = 'Select as a Favorite!';
-  }
+  // if (direction === 'toMain') {
+  //   mainList.appendChild(card);
+  //   card.classList.remove('fav-brewer');
+  //   card.classList.add('brewer');
+  //   card.lastChild.children[5].innerHTML = 'Select as a Favorite!';
+  // }
+
+  // Abbreviated version:
+  const params =
+    direction === 'toFavs'
+      ? [favsList, 'brewer', 'fav-brewer', 'Unselect as a Favorite!']
+      : [mainList, 'fav-brewer', 'brewer', 'Select as a Favorite!'];
+
+  params[0].appendChild(card);
+  card.classList.remove(params[1]);
+  card.classList.add(params[2]);
+  card.lastChild.children[5].innerHTML = params[3];
+
   const mainBrewers = document.querySelectorAll('.brewer');
   const newAvailArr = Array.from(mainBrewers);
   const favBrewers = document.querySelectorAll('.fav-brewer');
@@ -121,43 +134,64 @@ const setListeners = (className) => {
 // sort data based on brewery object name
 // I couldn't figure out if it was possible to store the notation behind "a" and "b" in a variable in the "if" statement.  Tried, but unsuccessful
 const sortData = (order, arr1, arr2) => {
-  const sortAsc = (a, b) => {
-    if (
-      a.children[0].children[1].innerText > b.children[0].children[1].innerText
-    )
-      return 1;
-    else if (
-      a.children[0].children[1].innerText < b.children[0].children[1].innerText
-    )
-      return -1;
+  // Abbreviated version below
+  // const sortAsc = (a, b) => {
+  //   if (
+  //     a.children[0].children[1].innerText > b.children[0].children[1].innerText
+  //   )
+  //     return 1;
+  //   else if (
+  //     a.children[0].children[1].innerText < b.children[0].children[1].innerText
+  //   )
+  //     return -1;
+  //   else return 0;
+  // };
+
+  // const sortDesc = (a, b) => {
+  //   if (
+  //     a.children[0].children[1].innerText < b.children[0].children[1].innerText
+  //   )
+  //     return 1;
+  //   else if (
+  //     a.children[0].children[1].innerText > b.children[0].children[1].innerText
+  //   )
+  //     return -1;
+  //   else return 0;
+  // };
+
+  // Abbreviated version
+  const sortItems = (a, b) => {
+    const firstVal = a.children[0].children[1].innerText;
+    const secondVal = b.children[0].children[1].innerText;
+    if (firstVal > secondVal) return order === 'asc' ? 1 : -1;
+    else if (firstVal < secondVal) return order === 'asc' ? -1 : 1;
     else return 0;
   };
 
-  const sortDesc = (a, b) => {
-    if (
-      a.children[0].children[1].innerText < b.children[0].children[1].innerText
-    )
-      return 1;
-    else if (
-      a.children[0].children[1].innerText > b.children[0].children[1].innerText
-    )
-      return -1;
-    else return 0;
-  };
+  // Abbreviated version below:
+  // if (order === 'asc') {
+  //   arr1.sort(sortAsc);
+  //   arr2.sort(sortAsc);
+  // } else if (order === 'desc') {
+  //   arr1.sort(sortDesc);
+  //   arr2.sort(sortDesc);
+  // }
+  // Abbreviated version
+  [arr1, arr2].forEach((arr) => arr.sort(sortItems));
 
-  if (order === 'asc') {
-    arr1.sort(sortAsc);
-    arr2.sort(sortAsc);
-  } else if (order === 'desc') {
-    arr1.sort(sortDesc);
-    arr2.sort(sortDesc);
-  }
+  // Abbreviated version below:
+  // arr1.forEach((item) => {
+  //   mainList.append(item);
+  // });
 
-  arr1.forEach((item) => {
-    mainList.append(item);
-  });
-
-  arr2.forEach((item) => {
-    favsList.append(item);
-  });
+  // arr2.forEach((item) => {
+  //   favsList.append(item);
+  // });
+  // Abbreviated version
+  [arr1, arr2].forEach((arr) =>
+    arr.forEach((item) => {
+      const container = arr === arr1 ? mainList : favsList;
+      container.append(item);
+    })
+  );
 };
